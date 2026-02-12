@@ -58,13 +58,14 @@ export default function AdminLayout({
   );
 
   const stagingLinks = [
+    /* Ubah tampilan "Onhand" jadi "Cair" */
+    {
+      title: "Cair",
+      href: "/admin/staging/onhand",
+    },
     {
       title: "Akad",
       href: "/admin/staging/akad",
-    },
-    {
-      title: "Onhand",
-      href: "/admin/staging/onhand",
     },
     {
       title: "SPPK",
