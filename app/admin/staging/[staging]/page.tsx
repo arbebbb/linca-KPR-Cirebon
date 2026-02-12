@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import ApplicationsPage from "../../applications/page";
 
 const STAGING_MAP: Record<string, string> = {
-  cair: "Cair",
+  onhand: "Onhand",
   akad: "Akad",
   sppk: "SPPK",
   inproses: "Inproses",
