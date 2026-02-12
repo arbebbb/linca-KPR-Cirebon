@@ -34,7 +34,6 @@ const STATUS_ICONS: Record<string, React.ReactNode> = {
   'PK': <Users className="h-6 w-6" />,
   'Reject': <XCircle className="h-6 w-6" />,
   'Realisasi': <TrendingUp className="h-6 w-6" />,
-  'Onhand': <BarChart3 className="h-6 w-6" />,
   'SPPK': <CheckCircle className="h-6 w-6" />,
 };
 
