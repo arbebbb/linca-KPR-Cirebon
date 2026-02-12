@@ -6,7 +6,6 @@ import ApplicationsPage from "../../applications/page";
 const STAGING_MAP: Record<string, string> = {
   cair: "Cair",
   akad: "Akad",
-  onhand: "Onhand",
   sppk: "SPPK",
   inproses: "Inproses",
   "reject-cancel": "Reject/Cancel",
