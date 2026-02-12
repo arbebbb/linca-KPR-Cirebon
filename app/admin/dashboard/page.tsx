@@ -37,6 +37,14 @@ const STATUS_ICONS: Record<string, React.ReactNode> = {
   'SPPK': <CheckCircle className="h-6 w-6" />,
 };
 
+const STATUS_LABELS: Record<string, string> = {
+  Akad: "Akad",
+  SPPK: "SPPK",
+  Inproses: "Inproses",
+  "Reject/Cancel": "Reject/Cancel",
+  Onhand: "Cair",
+};
+
 export default function AdminDashboardPage() {
   const [stats, setStats] = useState<StatsItem[]>([]);
   const [recentApplications, setRecentApplications] = useState<Application[]>([]);
@@ -149,7 +157,8 @@ export default function AdminDashboardPage() {
                       <div className="flex flex-col items-center text-center">
                         <div className={colors.text}>{STATUS_ICONS[stat.staging] || <FileText className="h-6 w-6" />}</div>
                         <span className={`text-2xl font-bold mt-2 ${colors.text}`}>{stat.count}</span>
-                        <span className={`text-sm ${colors.text}`}>{stat.staging}</span>
+                        {/* Hardcode ubah tulisan card pakai STATUS_LABELS */}
+                        <span className={`text-sm ${colors.text}`}>{STATUS_LABELS[stat.staging] || stat.staging}</span>
                       </div>
                     </CardContent>
                   </Card>
