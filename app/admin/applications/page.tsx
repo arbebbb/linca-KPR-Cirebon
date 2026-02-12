@@ -956,6 +956,13 @@ export default function ApplicationsPage({
               <CardDescription>
                 Menampilkan {applications.length} dari {totalCount} data
               </CardDescription>
+              {/* Penjelasan status */}
+              <div className="flex items-center gap-2 text-sm mt-2">
+                <span className="bg-red-500 text-white px-0.5 py-0.5 rounded font-bold">Merah:</span>
+                <span className="text-muted-foreground">
+                  Aplikasi telah lebih dari 5 hari kerja
+                </span>
+              </div>
             </div>
           </div>
         </CardHeader>
@@ -1068,7 +1075,29 @@ export default function ApplicationsPage({
                               "-"
                             )}
                           </TableCell>
-                          <TableCell>{formatDate(app.proses_sistem)}</TableCell>
+                          {/* Mark merah untuk proses_sistem lebih dari 7 hari (5 hari kerja) */}
+                          <TableCell>
+                            {(() => {
+                              if (!app.proses_sistem) return "-";
+
+                              const prosesDate = new Date(app.proses_sistem);
+                              const today = new Date();
+
+                              const diffTime = today.getTime() - prosesDate.getTime();
+                              const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+                              const isOverdue = diffDays > 7;
+
+                              return (
+                                <span
+                                  className={`inline-block px-2 py-1 rounded ${
+                                    isOverdue ? "bg-red-500 text-white" : ""
+                                  }`}
+                                >
+                                  {formatDate(app.proses_sistem)}
+                                </span>
+                              );
+                            })()}
                           <TableCell>{app.wa_sales || "-"}</TableCell>
                           <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
                             <div className="flex items-center justify-end gap-1">
@@ -1303,11 +1332,17 @@ export default function ApplicationsPage({
                   <SelectContent>
                     <SelectItem value="none">Pilih Status</SelectItem>
                     {filterOptions?.staging?.length
-                      ? filterOptions.staging.map((status) => (
-                          <SelectItem key={status.id} value={String(status.id)}>
-                            {status.name}
-                          </SelectItem>
-                        ))
+                      ? filterOptions.staging.map((status) => {
+                          // Hardcode tampilan "Onhand" jadi "Cair" -> di database tetap "Onhand"
+                          const displayName =
+                            status.name === "Onhand" ? "Cair" : status.name;
+
+                          return (
+                            <SelectItem key={status.id} value={String(status.id)}>
+                              {displayName}
+                            </SelectItem>
+                          );
+                        })
                       : null}
                   </SelectContent>
                 </Select>
