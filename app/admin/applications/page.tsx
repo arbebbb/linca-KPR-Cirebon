@@ -1322,7 +1322,7 @@ export default function ApplicationsPage({
             {/* Status Info */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="staging">Staging</Label>
+                <Label htmlFor="staging">Staging *</Label>
                 <Select
                   value={formData.staging_id ? String(formData.staging_id) : "none"}
                   onValueChange={(v) => handleSelectChange("staging_id", v)}
@@ -1447,7 +1447,7 @@ export default function ApplicationsPage({
               >
                 Batal
               </Button>
-              <Button type="submit" disabled={isSubmitting} className="bg-navy-500 hover:bg-navy-600">
+              <Button type="submit" disabled={isSubmitting || !formData.staging_id} className="bg-navy-500 hover:bg-navy-600">
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
